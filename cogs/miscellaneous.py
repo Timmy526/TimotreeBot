@@ -17,19 +17,20 @@ class miscellaneous(commands.Cog):
     print('Miscellaneous Commands are ready')
 
   #Hello command
-  @client.command()
+  @client.command(aliases = ['Hello'])
   async def hello(self, ctx):
     await ctx.send('Hi')
 
-  #Ping/Pong
-  @client.command()
-  async def ping(self, ctx):
-    await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
-
   #8 Ball
-  @client.command(aliases = ['8ball'])
+  @client.command(aliases = ['8ball', '8Ball', 'EightBall', 'eightball'])
   async def eightBall(self, ctx, *, question):
-    await ctx.send(f'Question: {question}\n Answer: {random.choice(eightBallresponses)}')
+    eightBallEmbed = discord.Embed(
+      color = 0xF2BAC9
+    )
+    eightBallEmbed.set_author(name = '8-Ball', icon_url = 'https://legomenon.com/images/magic-8-ball-game-accurate.png')
+    eightBallEmbed.add_field(name = 'Mystical 8 Ball says', value = str(f'{random.choice(eightBallresponses)}'), inline = True)
+    await ctx.send(embed = eightBallEmbed)
+
   
 
 def setup(client):
